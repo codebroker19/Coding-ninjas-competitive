@@ -174,3 +174,75 @@ int main( int argc , char ** argv )
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+/*
+				PROBLEM STATEMENT
+Shreya loves to eat momos. Her mother gives her money to buy vegetables but she 
+manages to save some money out of it daily. After buying vegetables, she goes to 
+"Momos Market", where there are ‘n’ number of shops of momos. Each of the shop of
+momos has a rate per momo. She visits the market and starts buying momos (one from 
+each shop) starting from the first shop. She will visit the market for ‘q’ days.
+You have to tell that how many momos she can buy at each day if she starts buying 
+from the first shop daily. She cannot use the remaining money of one day on some other 
+day. But she will save them for other expenses in future, so, 
+you also need to tell the sum of money left with her at the end of each day.
+*/
+
+
+
+
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n;
+    cin>>n;
+    long long a[n];
+    for(int i=0;i<n;i++)
+        cin>>a[i];
+    long long money[n];
+    money[0]=a[0];
+    for(int i=1;i<n;i++)
+        money[i]=money[i-1]+a[i];
+    int q,x;
+    cin>>q;
+    while(q--)
+    {
+        cin>>x;
+        long long start=0;
+        long long end=n-1;
+        long long ans=-1;
+         
+        while(start<=end)
+        {
+            long long mid=start+(end-start)/2;
+            if(money[mid]<=x)
+            {
+                ans=max(mid,ans);
+                start=mid+1;
+            }
+            else
+                end=mid-1;
+        }
+        long long moneyleft=x;
+         //if(ans!=-1)
+            moneyleft=moneyleft-money[ans];  
+        cout<<ans+1<<" "<<moneyleft<<"\n";
+        }
+        
+    
+    return 0;
+}
